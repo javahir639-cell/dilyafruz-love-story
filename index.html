@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#3d0d25"><meta name="description" content="DILAFRUZ — OUR LOVE STORY">
+  <title>DILAFRUZ — OUR LOVE STORY</title>
+  <link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/animations.css"><link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/chapters.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><span class="orb orb--one"></span><span class="orb orb--two"></span><span class="orb orb--three"></span><div class="petals" id="petals"></div><div class="stars" id="stars"></div></div>
+  <main id="app">
+    <section class="intro" id="intro" aria-labelledby="intro-title"><div class="intro__content">
+      <p class="eyebrow">OUR LOVE STORY</p>
+      <button class="envelope" id="open-story" type="button" aria-label="Открыть нашу историю"><span class="envelope__flap"></span><span class="envelope__letter"></span><span class="envelope__seal">♥</span></button>
+      <h1 id="intro-title">У меня есть одна история,<br>которую я хочу тебе показать…</h1>
+      <button class="button button--primary" id="open-story-copy" type="button">Открыть нашу историю <span aria-hidden="true">→</span></button>
+    </div></section>
+    <section class="story hidden" id="story" aria-labelledby="story-title">
+      <header class="hero"><div><p class="eyebrow">НАША ИСТОРИЯ</p><h2 id="story-title">Время нашей истории</h2><p class="hero__subtitle" data-story-date>С 9 января 2026 года</p><div class="hero-clock" id="hero-love-clock" aria-label="Время нашей истории"><span><b>0</b>дней</span><span><b>00</b>часов</span><span><b>00</b>минут</span><span><b>00</b>секунд</span><span><b>000</b>мс</span></div></div><div class="hero__actions"><button class="icon-button" id="gallery-open" type="button" aria-label="Открыть фотографии">▧</button><button class="icon-button" id="music-toggle" type="button" aria-label="Включить музыку" aria-pressed="false">♫</button><button class="icon-button" id="settings-toggle" type="button" aria-label="Открыть настройки">•••</button></div></header>
+      <section class="progress-card glass" aria-label="Общий прогресс"><div class="progress-card__top"><span>Наш путь</span><strong id="progress-text">0 из 20 глав</strong></div><div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><span id="progress-fill"></span></div><p id="progress-caption">Первая глава ждёт своего момента.</p></section>
+      <section class="chapters" aria-labelledby="chapters-title"><div class="section-heading"><p class="eyebrow">CHAPTERS</p><h3 id="chapters-title">Карта нашей истории</h3></div><div class="chapter-grid" id="chapter-grid" aria-live="polite"></div></section>
+    </section>
+    </main>
+    <section class="chapter-stage" id="chapter-stage" hidden aria-live="polite"></section>
+  <aside class="settings-panel glass" id="settings-panel" aria-label="Настройки" aria-hidden="true"><div class="settings-panel__header"><h2>Настройки</h2><button class="icon-button" id="settings-close" type="button" aria-label="Закрыть настройки">×</button></div><label class="range-label" for="volume">Громкость <output id="volume-value">45%</output></label><input id="volume" type="range" min="0" max="100" value="45"><button class="text-button" id="reset-progress" type="button">Сбросить прогресс</button><p class="settings-note">Музыка запускается только после вашего нажатия.</p></aside>
+  <dialog class="chapter-dialog glass" id="chapter-dialog" aria-labelledby="dialog-title"><button class="dialog-close" id="dialog-close" type="button" aria-label="Закрыть">×</button><p class="eyebrow" id="dialog-number">CHAPTER 01</p><h2 id="dialog-title"></h2><p id="dialog-description"></p><p class="dialog-status" id="dialog-status"></p></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div><audio id="background-audio" preload="none" loop></audio>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

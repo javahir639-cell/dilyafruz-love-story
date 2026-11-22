@@ -1,0 +1,11 @@
+import { galleryPhotos, chapterPhotos, letterPhotos } from '../data/photos.js';
+import { memories } from '../data/memories.js';
+const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+
+/** Галерея только для просмотра; материалы добавляет создатель в data-файлах. */
+export function initialiseGallery(){
+ const trigger=document.querySelector('#gallery-open');if(!trigger)return null;const dialog=document.createElement('dialog');dialog.className='all-photos-dialog glass';document.body.append(dialog);
+ const getPhotos=()=>[...galleryPhotos,...memories,...chapterPhotos,...letterPhotos].filter(photo=>photo?.enabled&&photo.src);
+ const render=()=>{const photos=getPhotos();dialog.innerHTML=`<button class="dialog-close" type="button" aria-label="Закрыть фотографии">×</button><p class="eyebrow">НАШИ ФОТОГРАФИИ</p><h2>Моменты рядом</h2>${photos.length?`<div class="all-photos-grid">${photos.map((photo,index)=>`<button class="all-photo" type="button" data-index="${index}"><img src="${esc(photo.src)}" alt="${esc(photo.caption||'Наша фотография')}"><span>${esc(photo.caption)}</span></button>`).join('')}</div><section class="photo-viewer" hidden><button class="icon-button photo-prev" type="button" aria-label="Предыдущая фотография">←</button><figure><img><figcaption></figcaption></figure><button class="icon-button photo-next" type="button" aria-label="Следующая фотография">→</button></section>`:'<p class="gallery-empty">Фотографии появятся здесь, когда создатель добавит их в проект.</p>'}`;dialog.querySelector('.dialog-close').onclick=()=>dialog.close();if(!photos.length)return;let index=0;const viewer=dialog.querySelector('.photo-viewer'),image=viewer.querySelector('img'),caption=viewer.querySelector('figcaption');const open=i=>{index=(i+photos.length)%photos.length;const photo=photos[index];image.src=photo.src;image.alt=photo.caption||'Наша фотография';caption.textContent=photo.caption||'';viewer.hidden=false};dialog.querySelectorAll('.all-photo').forEach(button=>button.onclick=()=>open(Number(button.dataset.index)));dialog.querySelector('.photo-prev').onclick=()=>open(index-1);dialog.querySelector('.photo-next').onclick=()=>open(index+1)};
+ trigger.addEventListener('click',()=>{render();dialog.showModal()});return {render};
+}
